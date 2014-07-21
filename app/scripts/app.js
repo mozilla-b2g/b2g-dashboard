@@ -14,14 +14,14 @@ var app = angular
     'ngRoute',
     'ngSanitize',
     'elasticsearch',
-    'services.client'
+    'services.client',
+    'angular-flot'
   ]);
 
 app.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/main.html'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
