@@ -8,13 +8,16 @@
  *
  * Main module of the application.
  */
-angular
+var app = angular
   .module('b2gQaDashboardApp', [
     'ngAnimate',
     'ngRoute',
-    'ngSanitize'
-  ])
-  .config(function ($routeProvider) {
+    'ngSanitize',
+    'elasticsearch',
+    'services.client'
+  ]);
+
+app.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -28,3 +31,4 @@ angular
         redirectTo: '/'
       });
   });
+
