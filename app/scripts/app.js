@@ -32,3 +32,8 @@ app.config(function ($routeProvider) {
       });
   });
 
+app.config(function($httpProvider) {
+  // TODO: Make CORS calls less permissive
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
+});

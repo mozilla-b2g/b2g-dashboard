@@ -356,6 +356,51 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    replace: {
+      development: {
+        options: {
+          patterns: [{
+            match: 'configJson',
+            replacement: grunt.file.readJSON('./config/environments/development.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/config.js'],
+          dest: '<%= yeoman.app %>/scripts/'
+        }]
+      },
+      staging: {
+        options: {
+          patterns: [{
+            match: 'configJson',
+            replacement: grunt.file.readJSON('./config/environments/staging.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/config.js'],
+          dest: '<%= yeoman.app %>/scripts/'
+        }]
+      },
+      production: {
+        options: {
+          patterns: [{
+            match: 'configJson',
+            replacement: grunt.file.readJSON('./config/environments/production.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/config.js'],
+          dest: '<%= yeoman.app %>/scripts/'
+        }]
+      }
     }
   });
 
@@ -368,6 +413,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'replace:development',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -405,9 +451,28 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
-  grunt.registerTask('default', [
+  grunt.registerTask('default-task', [
     'newer:jshint',
     'test',
     'build'
+  ]);
+
+  grunt.registerTask('development', [
+    'replace:development',
+    'default-task'
+  ]);
+
+  grunt.registerTask('staging', [
+    'replace:staging',
+    'default-task'
+  ]);
+
+  grunt.registerTask('production', [
+    'replace:production',
+    'default-task'
+  ]);
+
+  grunt.registerTask('default', [
+    'development'
   ]);
 };

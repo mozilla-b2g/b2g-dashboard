@@ -1,0 +1,9 @@
+{
+  "databases": {
+    "bugs": {
+      "host": "",
+      "index": "",
+      "type": ""
+    }
+  }
+}

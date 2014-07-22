@@ -1,0 +1,9 @@
+{
+  "databases": {
+    "bugs": {
+      "host": "http://localhost:9200",
+      "index": "qa-dashboard",
+      "type": "bugs"
+    }
+  }
+}

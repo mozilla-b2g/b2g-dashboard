@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('b2gQaDashboardApp')
-  .controller('FiledFixedCtrl', function ($scope, es) {
+  .controller('FiledFixedCtrl', function ($scope, es, config) {
     $scope.data = [];
     $scope.options = {
       series: {
@@ -16,8 +16,8 @@ angular.module('b2gQaDashboardApp')
 
 
     es.search({
-      index: 'qa-dashboard',
-      type: 'bugs',
+      index: config.databases.bugs.index,
+      type: config.databases.bugs.type,
       body: {
         "query": {
           "filtered": {
