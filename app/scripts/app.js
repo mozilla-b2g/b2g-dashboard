@@ -14,8 +14,8 @@ var app = angular
     'ngRoute',
     'ngSanitize',
     'elasticsearch',
-    'services.client',
-    'angular-flot'
+    'angular-flot',
+    'services'
   ]);
 
 app.config(function ($routeProvider) {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('b2gQaDashboardApp')
-  .controller('FiledFixedCtrl', function ($scope, es, config) {
+  .controller('FiledFixedCtrl', function ($scope, config, FiledSmoketestsBugsRequest) {
     $scope.data = [];
     $scope.options = {
       series: {
@@ -10,66 +10,20 @@ angular.module('b2gQaDashboardApp')
         }
       },
       xaxis: {
-        mode: "time"
+        mode: 'time'
       }
     };
 
-
-    es.search({
-      index: config.databases.bugs.index,
-      type: config.databases.bugs.type,
-      body: {
-        "query": {
-          "filtered": {
-            "query": {
-              "match_all": {}
-            },
-            "filter": {
-              "and": [
-                {
-                  "range": {
-                    "expires_on": {
-                      "gte": Date.now()
-                    }
-                  }
-                },
-                {
-                  "term": {
-                    "keywords": "smoketest"
-                  }
-                },
-                {
-                  "exists": {
-                    "field": "cf_blocking_b2g"
-                  }
-                },
-                {
-                  "not": {
-                    "terms": {
-                      "cf_blocking_b2g": ["---", "-"]
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        "facets": {
-          "events_by_creation_time": {
-            "date_histogram": {
-              "field": "created_ts",
-              "interval": "week"
-            }
-          }
-        }
-      }
-    }).then(function (resp) {
+    var request = new FiledSmoketestsBugsRequest();
+    request.execute().then(function() {
       var data = [];
-      resp.facets.events_by_creation_time.entries.forEach(function(entry) {
-        data.push([entry.time, entry.count]);
-        });
+
+      Object.keys(request.results).forEach(function(key) {
+        var timestamp = parseInt(key);
+        var bugsCount = request.results[key].length;
+        data.push([timestamp, bugsCount])
+      });
+
       $scope.data = [data];
-    }, function (err) {
-      console.trace(err.message);
-    })
+    });
   });
