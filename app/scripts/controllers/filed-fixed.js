@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('b2gQaDashboardApp')
-  .controller('FiledFixedCtrl', function ($scope, config, FiledSmoketestsBugsRequest) {
+  .controller('FiledFixedCtrl', function ($scope, config, FiledSmoketestsBugsRequest, FixedSmoketestsBugsRequest) {
     $scope.data = [];
     $scope.options = {
       series: {
@@ -14,16 +14,21 @@ angular.module('b2gQaDashboardApp')
       }
     };
 
-    var request = new FiledSmoketestsBugsRequest();
-    request.execute().then(function() {
-      var data = [];
+    executeRequestAndPushData(new FiledSmoketestsBugsRequest());
+    executeRequestAndPushData(new FixedSmoketestsBugsRequest());
 
-      Object.keys(request.results).forEach(function(key) {
-        var timestamp = parseInt(key);
-        var bugsCount = request.results[key].length;
-        data.push([timestamp, bugsCount])
+    function executeRequestAndPushData(request) {
+      request.execute().then(function() {
+        var requestData = [];
+
+        Object.keys(request.results).forEach(function(key) {
+          var timestamp = parseInt(key);
+          var bugsCount = request.results[key].length;
+          requestData.push([timestamp, bugsCount]);
+        });
+
+        $scope.data.push(requestData);
       });
+    }
 
-      $scope.data = [data];
-    });
   });
