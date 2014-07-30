@@ -14,7 +14,7 @@ var app = angular
     'ngRoute',
     'ngSanitize',
     'elasticsearch',
-    'angular-flot',
+    'angularChart',
     'services'
   ]);
 

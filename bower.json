@@ -10,20 +10,15 @@
     "angular-animate": "1.2.16",
     "angular-route": "1.2.16",
     "elasticsearch": "~2.4.0",
-    "flot": "~0.8.3",
-    "angular-flot": "~0.0.5"
+    "angular-chart": "~0.1.2"
   },
   "overrides": {
     "elasticsearch": {
       "main": "elasticsearch.angular.js"
-    },
-    "flot": {
-      "main": ["jquery.flot.js", "jquery.flot.time.js"]
     }
   },
   "devDependencies": {
     "angular-mocks": "1.2.16",
     "angular-scenario": "1.2.16"
-  },
-  "appPath": "app"
+  }
 }

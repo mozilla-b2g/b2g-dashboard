@@ -2,33 +2,55 @@
 
 angular.module('b2gQaDashboardApp')
   .controller('FiledFixedCtrl', function ($scope, config, FiledSmoketestsBugsRequest, FixedSmoketestsBugsRequest) {
-    $scope.data = [];
+
+    $scope.dataset = {
+      schema: [{
+        name: 'weekDay',
+        type: 'datetime',
+        format: ' '
+      }],
+      records: []
+    };
+
     $scope.options = {
-      series: {
-        bars: {
-          show: true
-        }
+      rows: [],
+      xAxis: {
+        name: 'weekDay',
+        displayFormat: '%Y-%m-%d'
       },
-      xaxis: {
-        mode: 'time'
+      subchart: {
+        show: true
       }
     };
 
-    executeRequestAndPushData(new FiledSmoketestsBugsRequest());
-    executeRequestAndPushData(new FixedSmoketestsBugsRequest());
+    executeRequestAndPushData('Filed', new FiledSmoketestsBugsRequest());
+    executeRequestAndPushData('Fixed', new FixedSmoketestsBugsRequest());
 
-    function executeRequestAndPushData(request) {
+    function executeRequestAndPushData(keyName, request) {
+      $scope.dataset.schema.push({ name: keyName });
+      $scope.options.rows.push({ name: keyName, type: 'bar' });
+
       request.execute().then(function() {
-        var requestData = [];
-
         Object.keys(request.results).forEach(function(key) {
           var timestamp = parseInt(key);
           var bugsCount = request.results[key].length;
-          requestData.push([timestamp, bugsCount]);
+          var value = getExistingRecordIfItExists(timestamp);
+          value[keyName] = bugsCount;
+          $scope.dataset.records.push(value);
         });
-
-        $scope.data.push(requestData);
       });
+    }
+
+    function getExistingRecordIfItExists(timestamp) {
+      var record = { weekDay: new Date(timestamp) };
+      $scope.dataset.records.some(function(element) {
+        if (+(element.weekDay) === timestamp) {
+          record = element;
+          return true;
+        }
+        return false;
+      });
+      return record;
     }
 
   });
