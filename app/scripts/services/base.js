@@ -5,6 +5,7 @@ angular.module('services').factory('Base', function(elasticsearch) {
     this.index = index || '';
     this.type = type || '';
     this.body = body || {};
+    this.results = [];
 
     return(this);
   }

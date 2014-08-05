@@ -17,5 +17,21 @@ angular.module('models').factory('Bug', function() {
     this.expires_on = expires_on || 9999999999000;
   };
 
+  Bug.prototype.hasBeenCreatedSince = function(timestamp) {
+    return this.created_ts <= timestamp;
+  };
+
+  Bug.prototype.hasBeenResolvedSince = function(timestamp) {
+    return this.cf_last_resolved > 0 && this.cf_last_resolved < timestamp;
+  };
+
+  Bug.prototype.getAgeInDaysAt = function (timestamp) {
+    var age = this.hasBeenResolvedSince(timestamp)
+      ? this.cf_last_resolved - this.created_ts
+      : timestamp - this.created_ts;
+
+    return Math.round(age / (24 * 60 * 60 * 1000));
+  };
+
   return Bug;
 });

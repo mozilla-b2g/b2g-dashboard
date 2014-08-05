@@ -1,1 +1,1 @@
-angular.module('services', ['config', 'models']);
+angular.module('services', ['constants', 'config', 'models']);
