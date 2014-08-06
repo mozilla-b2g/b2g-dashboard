@@ -27,6 +27,8 @@ angular.module('b2gQaDashboardApp')
 
     function executeRequestAndPushData(request) {
       request.execute().then(function() {
+        $scope.sortedData = request.results;
+
         var firstIntervalArray = request.results[Object.keys(request.results)[0]];
         $scope.options.rows = generateRows(firstIntervalArray);
 

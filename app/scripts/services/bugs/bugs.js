@@ -8,6 +8,13 @@ angular.module('services').factory('BugsRequest', function(Base, config, Bug) {
     this.index = config.databases.bugs.index;
     this.type = config.databases.bugs.type;
     this.body = {
+      "sort" : [
+        {
+          "bug_id" : {
+            "order" : "asc"
+          }
+        }
+      ],
       "query": {
         "filtered": {
           "query": {

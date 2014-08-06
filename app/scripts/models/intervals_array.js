@@ -40,5 +40,16 @@ angular.module('models').factory('IntervalsArray', function() {
     return string;
   };
 
+  IntervalsArray.prototype.endPointsIndexFromString = function(endPointString) {
+    var index = -1;
+    for (var i = 0; i < this.endPoints.length; i++) {
+      if (this.endPointsToString(i) === endPointString) {
+        index = i;
+        break;
+      }
+    }
+    return index;
+  };
+
   return IntervalsArray;
 });

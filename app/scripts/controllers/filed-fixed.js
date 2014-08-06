@@ -23,6 +23,8 @@ angular.module('b2gQaDashboardApp')
       }
     };
 
+    $scope.sortedData = {};
+
     executeRequestAndPushData('Filed', new FiledSmoketestsBugsRequest());
     executeRequestAndPushData('Fixed', new FixedSmoketestsBugsRequest());
 
@@ -36,6 +38,11 @@ angular.module('b2gQaDashboardApp')
           var bugsCount = request.results[key].length;
           var value = getExistingRecordIfItExists(timestamp);
           value[keyName] = bugsCount;
+
+          if (typeof $scope.sortedData[timestamp] === 'undefined') {
+              $scope.sortedData[timestamp] = {};
+          }
+          $scope.sortedData[timestamp][keyName] = request.results[key];
           $scope.dataset.records.push(value);
         });
       });
