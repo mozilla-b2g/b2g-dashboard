@@ -25,10 +25,6 @@ app.config(function ($routeProvider) {
       .when('/', {
         templateUrl: 'views/main.html'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
       .otherwise({
         redirectTo: '/'
       });
