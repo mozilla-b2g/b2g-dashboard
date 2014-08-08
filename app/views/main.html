@@ -8,7 +8,7 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="filter in availableFilters.cf_blocking_b2g">
+        <li ng-repeat="filter in availableFilters.cf_blocking_b2g | orderBy:'name'">
           <a ng-click="setFilter(filter)">{{filter.name}}</a>
         </li>
       </ul>

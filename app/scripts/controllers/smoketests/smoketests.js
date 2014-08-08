@@ -14,6 +14,7 @@ angular.module('b2gQaDashboardApp')
       request.execute().then(function() {
         $scope.smoketests = request.results;
         $scope.filteredResults = $scope.smoketests;
+        filters.generateAvailable($scope.smoketests);
       });
     }
 

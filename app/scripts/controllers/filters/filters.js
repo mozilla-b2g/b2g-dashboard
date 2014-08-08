@@ -5,14 +5,19 @@ angular.module('b2gQaDashboardApp')
 
     var available = {
       cf_blocking_b2g: [
-        { name: 'All', value: '' },
-        { name: '1.4', value: '1.4' },
-        { name: '2.0', value: '2.0' },
-        { name: '2.1', value: '2.1' }
+        { name: '- All -', value: '' }
       ]
     };
 
     var selected = getAvailableDefaultValues();
+
+    var generateAvailable = function(smoketests) {
+      Object.keys(smoketests).forEach(function(bugId){
+        var bug = smoketests[bugId];
+        var value = { name: bug.cf_blocking_b2g, value: bug.cf_blocking_b2g };
+        addAvailable('cf_blocking_b2g', value);
+      })
+    };
 
     function getAvailableDefaultValues() {
       var selected = {};
@@ -22,9 +27,26 @@ angular.module('b2gQaDashboardApp')
       return selected;
     }
 
+    function addAvailable(key, value) {
+      if (typeof available[key] === 'undefined') {
+        available[key] = [];
+      }
+
+      var hasBeenFound = false;
+      available[key].some(function(filter) {
+        hasBeenFound = (filter.name === value.name);
+        return hasBeenFound;
+      });
+
+      if (!hasBeenFound) {
+        available[key].push(value);
+      }
+    }
+
     return {
       available: available,
-      selected: selected
+      selected: selected,
+      generateAvailable: generateAvailable
     };
 
   });
