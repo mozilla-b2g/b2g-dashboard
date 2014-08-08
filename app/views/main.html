@@ -1,8 +1,20 @@
-<input type="radio" ng-model="filters.cf_blocking_b2g" value=""> All<br/>
-<input type="radio" ng-model="filters.cf_blocking_b2g" value="1.4"> 1.4<br/>
-<input type="radio" ng-model="filters.cf_blocking_b2g" value="2.0"> 2.0<br/>
-<input type="radio" ng-model="filters.cf_blocking_b2g" value="2.1"> 2.1<br/>
 <div ng-controller="SmoketestsCtrl">
+
+  <div ng-controller="VersionFilterCtrl">
+    Version:
+    <div class="btn-group" dropdown>
+      <button type="button" class="btn">{{ selectedFilters.cf_blocking_b2g.name }}</button>
+      <button type="button" class="btn dropdown-toggle">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="filter in availableFilters.cf_blocking_b2g">
+          <a ng-click="setFilter(filter)">{{filter.name}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
   <div id="smoketestFiledFixed" ng-controller="SmoketestsFiledFixedCtrl">
     <angularchart dataset="chartData" options="chartOptions"></angularchart>
   </div>

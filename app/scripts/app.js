@@ -13,6 +13,7 @@ var app = angular
     'ngAnimate',
     'ngRoute',
     'ngSanitize',
+    'ui.bootstrap',
     'elasticsearch',
     'angularChart',
     'services',

@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('b2gQaDashboardApp')
-  .controller('SmoketestsCtrl', function ($scope, config, SmoketestsBugsRequest) {
+  .controller('SmoketestsCtrl', function ($scope, config, SmoketestsBugsRequest, filters) {
 
     $scope.smoketests = {};
     $scope.filteredResults = {};
+    $scope.selectedFilters = filters.selected;
+    var checkEquality = true;
 
     executeRequestAndPushData(new SmoketestsBugsRequest());
 
@@ -15,17 +17,13 @@ angular.module('b2gQaDashboardApp')
       });
     }
 
-    $scope.$watch("filters.cf_blocking_b2g", function(newName, oldName) {
-        if (newName === oldName) {
-          return;
-        }
-        applySearchFilter();
-      }
+    $scope.$watch('selectedFilters',
+      function() { applySearchFilter(); },
+      checkEquality
     );
 
-
     function applySearchFilter() {
-      var filter = $scope.filters.cf_blocking_b2g.toLowerCase();
+      var filter = $scope.selectedFilters.cf_blocking_b2g.value.toLowerCase();
 
       if (filter === '') {
         $scope.filteredResults = $scope.smoketests;
