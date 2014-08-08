@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('b2gQaDashboardApp')
-  .controller('SmoketestsFiledFixedCtrl', function ($scope, ONE_WEEK, weeklyChartCommons) {
+  .controller('SmoketestsFiledFixedCtrl', function ($scope, weeklyChartCommons) {
 
     $scope.chartData = weeklyChartCommons.initializeDataset();
     $scope.chartOptions = weeklyChartCommons.initializeOptions();
@@ -11,21 +11,17 @@ angular.module('b2gQaDashboardApp')
       weeklyChartCommons.generateSortedResultsAndUpdateChart($scope, keys, generateWeekResults);
     });
 
-    function generateWeekResults(firstDayOfTheWeek) {
+    function generateWeekResults(lastDayOfTheWeek) {
       // TODO Make this function more generic
       var weekResults = { Filed: [], Fixed: [] };
 
       for(var bug_id in $scope.filteredResults) {
         var bug = $scope.filteredResults[bug_id];
-        var lastWeek = firstDayOfTheWeek - ONE_WEEK;
-        var nextWeek = firstDayOfTheWeek + ONE_WEEK;
-
-        if (bug.hasBeenCreatedSince(firstDayOfTheWeek)  // Get rid of the bugs that are not created yet
-          && !bug.hasBeenResolvedSince(lastWeek)) {   // Get rid of the bugs that have already been resolved and counted
+        if (bug.wasOpenDuringWeek(lastDayOfTheWeek)) {
           weekResults.Filed.push(bug.bug_id);
         }
 
-        if (bug.hasBeenResolvedSince(nextWeek) && bug.cf_last_resolved > firstDayOfTheWeek) {
+        if (bug.hasBeenResolvedDuringWeek(lastDayOfTheWeek)) {
           weekResults.Fixed.push(bug.bug_id);
         }
       }

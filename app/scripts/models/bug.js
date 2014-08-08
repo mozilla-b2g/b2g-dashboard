@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('models').factory('Bug', function() {
+angular.module('models').factory('Bug', function(ONE_WEEK) {
 
   var Bug = function(bug_id, short_desc, product, component, bug_status, resolution, created_ts, cf_last_resolved,
                      keywords, cf_blocking_b2g, expires_on) {
@@ -15,6 +15,17 @@ angular.module('models').factory('Bug', function() {
     this.keywords = keywords || [];
     this.cf_blocking_b2g = cf_blocking_b2g || '---';
     this.expires_on = expires_on || 9999999999000;
+  };
+
+  Bug.prototype.wasOpenDuringWeek = function(lastDayOfTheWeek) {
+    var lastWeek = lastDayOfTheWeek - ONE_WEEK;
+    return this.hasBeenCreatedSince(lastDayOfTheWeek) // Was created before the end of the week
+            && !this.hasBeenResolvedSince(lastWeek);  // But was not resolved before the last week
+  };
+
+  Bug.prototype.hasBeenResolvedDuringWeek = function(lastDayOfTheWeek) {
+    var lastWeek = lastDayOfTheWeek - ONE_WEEK;
+    return this.hasBeenResolvedSince(lastDayOfTheWeek) && !this.hasBeenResolvedSince(lastWeek)
   };
 
   Bug.prototype.hasBeenCreatedSince = function(timestamp) {
