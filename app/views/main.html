@@ -1,6 +1,12 @@
-<div ng-controller="FiledFixedCtrl">
-  <angularchart dataset="dataset" options="options"></angularchart>
-</div>
-<div ng-controller="SmoketestAgeCtrl">
-  <angularchart dataset="dataset" options="options"></angularchart>
+<input type="radio" ng-model="filters.cf_blocking_b2g" value=""> All<br/>
+<input type="radio" ng-model="filters.cf_blocking_b2g" value="1.4"> 1.4<br/>
+<input type="radio" ng-model="filters.cf_blocking_b2g" value="2.0"> 2.0<br/>
+<input type="radio" ng-model="filters.cf_blocking_b2g" value="2.1"> 2.1<br/>
+<div ng-controller="SmoketestsCtrl">
+  <div id="smoketestFiledFixed" ng-controller="SmoketestsFiledFixedCtrl">
+    <angularchart dataset="chartData" options="chartOptions"></angularchart>
+  </div>
+  <div id="smoketestAge" ng-controller="SmoketestsAgeCtrl">
+    <angularchart dataset="chartData" options="chartOptions"></angularchart>
+  </div>
 </div>

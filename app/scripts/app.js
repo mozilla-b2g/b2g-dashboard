@@ -15,7 +15,8 @@ var app = angular
     'ngSanitize',
     'elasticsearch',
     'angularChart',
-    'services'
+    'services',
+    'constants'
   ]);
 
 app.config(function ($routeProvider) {

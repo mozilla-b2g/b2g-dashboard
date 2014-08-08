@@ -47,13 +47,13 @@ angular.module('services').factory('BugsRequest', function(Base, config, Bug) {
     var parentExecute = Base.prototype.execute.apply(this, arguments);
 
     return parentExecute.then(function(response) {
-      var results = [];
+      var results = {};
 
       self.results.forEach(function(result){
-        results.push(new Bug(
+        results[result.bug_id] = new Bug(
           result.bug_id, result.short_desc, result.product, result.component, result.bug_status, result.resolution,
           result.created_ts, result.cf_last_resolved, result.keywords, result.cf_blocking_b2g, result.expires_on
-        ));
+        );
       });
 
       self.results = results;
