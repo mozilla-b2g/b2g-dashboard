@@ -1,28 +1,32 @@
 'use strict';
 
 angular.module('b2gQaDashboardApp')
-  .controller('SmoketestsFiledFixedCtrl', function ($scope, weeklyChartCommons) {
+  .controller('SmoketestsOpenResolvedCtrl', function ($scope, weeklyChartCommons) {
 
     $scope.chartData = weeklyChartCommons.initializeDataset();
     $scope.chartOptions = weeklyChartCommons.initializeOptions();
 
+    var keys = ['Open', 'Resolved'];
+
     $scope.$watch('filteredResults', function() {
-      var keys = ['Filed', 'Fixed'];
       weeklyChartCommons.generateSortedResultsAndUpdateChart($scope, keys, generateWeekResults);
     });
 
     function generateWeekResults(lastDayOfTheWeek) {
-      // TODO Make this function more generic
-      var weekResults = { Filed: [], Fixed: [] };
+      var weekResults = {};
+
+      keys.forEach(function(key) {
+        weekResults[key] = []
+      });
 
       for(var bug_id in $scope.filteredResults) {
         var bug = $scope.filteredResults[bug_id];
         if (bug.wasOpenDuringWeek(lastDayOfTheWeek)) {
-          weekResults.Filed.push(bug.bug_id);
+          weekResults[keys[0]].push(bug.bug_id);
         }
 
         if (bug.hasBeenResolvedDuringWeek(lastDayOfTheWeek)) {
-          weekResults.Fixed.push(bug.bug_id);
+          weekResults[keys[1]].push(bug.bug_id);
         }
       }
       return weekResults;
