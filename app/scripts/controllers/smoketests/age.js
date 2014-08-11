@@ -7,6 +7,7 @@ angular.module('b2gQaDashboardApp')
     $scope.chartData = weeklyChartCommons.initializeDataset();
     $scope.chartOptions = weeklyChartCommons.initializeOptions();
     $scope.chartOptions.onclick = function (chart) { weeklyChartCommons.onclick(chart, $scope); };
+    $scope.chartOptions.groups = [dataKeys];
 
     $scope.$watch('filteredResults', function() {
       weeklyChartCommons.generateSortedResultsAndUpdateChart($scope, dataKeys, generateWeekResults);
