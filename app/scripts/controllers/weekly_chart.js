@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('b2gQaDashboardApp')
-  .factory('weeklyChartCommons', function (config, ONE_WEEK) {
+  .factory('weeklyChartCommons', function (config, ONE_WEEK, bugzilla) {
 
     var weeklyChartCommons = {};
 
@@ -69,6 +69,13 @@ angular.module('b2gQaDashboardApp')
         });
         dataset.records.push(value);
       });
+    };
+
+    weeklyChartCommons.onclick = function (chart, scope) {
+      var timestamp = +chart.x;
+      var serieName = chart.name;
+      var bugsIds = scope.sortedResults[timestamp][serieName];
+      bugzilla.open(bugsIds);
     };
 
     return weeklyChartCommons;

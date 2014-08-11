@@ -3,12 +3,13 @@
 angular.module('b2gQaDashboardApp')
   .controller('SmoketestsAgeCtrl', function ($scope, IntervalsObject, AGE_RANGES, weeklyChartCommons) {
 
+    var dataKeys = Object.keys(new IntervalsObject(AGE_RANGES));
     $scope.chartData = weeklyChartCommons.initializeDataset();
     $scope.chartOptions = weeklyChartCommons.initializeOptions();
+    $scope.chartOptions.onclick = function (chart) { weeklyChartCommons.onclick(chart, $scope); };
 
     $scope.$watch('filteredResults', function() {
-      var keys = Object.keys(new IntervalsObject(AGE_RANGES));
-      weeklyChartCommons.generateSortedResultsAndUpdateChart($scope, keys, generateWeekResults);
+      weeklyChartCommons.generateSortedResultsAndUpdateChart($scope, dataKeys, generateWeekResults);
     });
 
     function generateWeekResults(lastDayOfTheWeek) {
