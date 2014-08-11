@@ -8,6 +8,7 @@ angular.module('b2gQaDashboardApp')
     $scope.chartOptions = weeklyChartCommons.initializeOptions();
     $scope.chartOptions.onclick = function (chart) { weeklyChartCommons.onclick(chart, $scope); };
     $scope.chartOptions.groups = [dataKeys];
+    $scope.chartOptions.colors = weeklyChartCommons.linkColors(dataKeys, ['green', 'orange', 'red']);
 
     $scope.$watch('filteredResults', function() {
       weeklyChartCommons.generateSortedResultsAndUpdateChart($scope, dataKeys, generateWeekResults);

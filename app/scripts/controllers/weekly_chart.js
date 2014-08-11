@@ -78,6 +78,16 @@ angular.module('b2gQaDashboardApp')
       bugzilla.open(bugsIds);
     };
 
+    weeklyChartCommons.linkColors = function (dataKeys, availableColors) {
+        var colors = {};
+        var i = 0;
+        dataKeys.forEach(function(key) {
+          colors[key] = availableColors[i];
+          i++;
+        });
+        return colors;
+      };
+
     return weeklyChartCommons;
 
   });
