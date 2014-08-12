@@ -3,6 +3,7 @@
 angular.module('b2gQaDashboardApp')
   .factory('weeklyChartCommons', function (config, ONE_WEEK, bugzilla) {
 
+    var today = Date.now();
     var weeklyChartCommons = {};
 
     weeklyChartCommons.initializeDataset = function () {
@@ -40,14 +41,10 @@ angular.module('b2gQaDashboardApp')
     weeklyChartCommons.buildSortedResults = function(filteredResults, generateWeekResults) {
       var sortedResults = {};
       var firstBug = filteredResults[Object.keys(filteredResults)[0]] || {};
-      var firstBugDate = new Date(firstBug.created_ts); //
+      var currentWeek = getFirstDayOfTheWeek(firstBug.created_ts);
+      var lastWeek = getLastWeek(filteredResults);
 
-      // Get the first day of the week where the first bug has been filed
-      var currentWeek = firstBugDate.getDate() - firstBugDate.getDay();
-      currentWeek = firstBugDate.setDate(currentWeek);
-
-      var today = Date.now();
-      while (currentWeek <= today) {
+      while (currentWeek <= lastWeek) {
         sortedResults[currentWeek] = generateWeekResults(currentWeek);
         currentWeek += ONE_WEEK;
       }
@@ -87,6 +84,46 @@ angular.module('b2gQaDashboardApp')
         });
         return colors;
       };
+
+    function getFirstDayOfTheWeek(timestamp) {
+      var date = new Date(timestamp);
+      var dayOfTheMonth = date.getDate() - date.getDay();
+      date.setDate(dayOfTheMonth);
+      date.setHours(0);
+      date.setMinutes(0);
+      date.setSeconds(0);
+      date.setMilliseconds(0);
+      return +date
+    }
+
+    function findLatestResolvedTimestamp(bugsObject) {
+      var oldestResolvedTimestamp = 0;
+
+      Object.keys(bugsObject).every(function(bugKey) {
+        var bug = bugsObject[bugKey];
+        if (bug.hasEverBeenResolved()) {
+          if (oldestResolvedTimestamp < bug.cf_last_resolved) {
+            oldestResolvedTimestamp = bug.cf_last_resolved;
+          }
+        } else {
+          oldestResolvedTimestamp = today;
+        }
+        return bug.hasEverBeenResolved();
+      });
+
+      return oldestResolvedTimestamp
+    }
+
+    function getLastWeek(bugsObject) {
+      var lastWeek = today;
+      var lastTimestamp = findLatestResolvedTimestamp(bugsObject);
+      if (lastTimestamp !== today) {
+        // If the last timestamp is the moment where the last bug has been fixed,
+        // we go to the beginning of the week after to show its fix on the chart
+        lastWeek = getFirstDayOfTheWeek(lastTimestamp) + ONE_WEEK;
+      }
+      return lastWeek;
+    }
 
     return weeklyChartCommons;
 
