@@ -6,7 +6,8 @@ angular.module('b2gQaDashboardApp')
     var available = {
       cf_blocking_b2g: [
         { name: '- All -', value: '' }
-      ]
+      ],
+      bugsIds: [[]]
     };
 
     var selected = getAvailableDefaultValues();

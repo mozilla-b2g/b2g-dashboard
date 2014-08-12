@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('b2gQaDashboardApp')
-  .factory('weeklyChartCommons', function (config, ONE_WEEK, bugzilla) {
+  .factory('weeklyChartCommons', function (config, ONE_WEEK, filters) {
 
     var today = Date.now();
     var weeklyChartCommons = {};
@@ -71,8 +71,8 @@ angular.module('b2gQaDashboardApp')
     weeklyChartCommons.onclick = function (chart, scope) {
       var timestamp = +chart.x;
       var serieName = chart.name;
-      var bugsIds = scope.sortedResults[timestamp][serieName];
-      bugzilla.open(bugsIds);
+      filters.selected.bugsIds = scope.sortedResults[timestamp][serieName];
+      scope.$apply(); // Needed, because this event was not triggered by AngularJS itself
     };
 
     weeklyChartCommons.linkColors = function (dataKeys, availableColors) {

@@ -18,24 +18,21 @@ angular.module('b2gQaDashboardApp')
       });
     }
 
-    $scope.$watch('selectedFilters',
-      function() { applySearchFilter(); },
-      checkEquality
-    );
+    $scope.$watchCollection('selectedFilters', applySearchFilter);
 
     function applySearchFilter() {
-      var filter = $scope.selectedFilters.cf_blocking_b2g.value.toLowerCase();
-
-      if (filter === '') {
-        $scope.filteredResults = $scope.smoketests;
-        return;
-      }
+      var versionFilter = $scope.selectedFilters.cf_blocking_b2g.value.toLowerCase();
 
       $scope.filteredResults = {};
       for(var bug_id in $scope.smoketests) {
         var bug = $scope.smoketests[bug_id];
-        if (bug.cf_blocking_b2g.indexOf(filter) !== -1) {
+
+        if (bug.cf_blocking_b2g.indexOf(versionFilter) !== -1) {
           $scope.filteredResults[bug_id] = bug;
+        }
+
+        if ($scope.selectedFilters.bugsIds.length > 0 && $scope.selectedFilters.bugsIds.indexOf(bug.bug_id) === -1) {
+          delete $scope.filteredResults[bug_id];
         }
       }
     }

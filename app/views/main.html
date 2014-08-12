@@ -1,19 +1,6 @@
 <div ng-controller="SmoketestsCtrl">
 
-  <div ng-controller="VersionFilterCtrl">
-    Version:
-    <div class="btn-group" dropdown>
-      <button type="button" class="btn">{{ selectedFilters.cf_blocking_b2g.name }}</button>
-      <button type="button" class="btn dropdown-toggle">
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="filter in availableFilters.cf_blocking_b2g | orderBy:'name'">
-          <a ng-click="setFilter(filter)">{{filter.name}}</a>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <div ng-include src="'/views/partials/filters.html'"></div>
 
   <div id="smoketestOpenResolved" ng-controller="SmoketestsOpenResolvedCtrl">
     <angularchart dataset="chartData" options="chartOptions"></angularchart>
