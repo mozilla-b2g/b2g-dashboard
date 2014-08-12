@@ -14,7 +14,8 @@ angular.module('b2gQaDashboardApp')
     var generateAvailable = function(smoketests) {
       Object.keys(smoketests).forEach(function(bugId){
         var bug = smoketests[bugId];
-        var value = { name: bug.cf_blocking_b2g, value: bug.cf_blocking_b2g };
+        var version = removeTrailingPlusOrQuestionMark(bug.cf_blocking_b2g);
+        var value = { name: version, value: version };
         addAvailable('cf_blocking_b2g', value);
       })
     };
@@ -41,6 +42,11 @@ angular.module('b2gQaDashboardApp')
       if (!hasBeenFound) {
         available[key].push(value);
       }
+    }
+
+    function removeTrailingPlusOrQuestionMark(string) {
+      var lastChar = string.slice(-1);
+      return ['+', '?'].indexOf(lastChar) === -1 ? string : string.slice(0, -1);
     }
 
     return {
