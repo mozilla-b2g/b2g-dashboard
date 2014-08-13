@@ -11,7 +11,7 @@
     "angular-route": "1.2.16",
     "angular-bootstrap": "~0.11.0",
     "elasticsearch": "~2.4.0",
-    "angular-chart": "master"
+    "angular-chart": "JohanLorenzo/angular-chart#hotfix"
   },
   "overrides": {
     "elasticsearch": {
