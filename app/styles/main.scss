@@ -80,6 +80,24 @@ table {
   }
 }
 
+.bug-status {
+  @extend .label;
+}
+
+.bug-status-resolved,
+.bug-status-verified {
+  @extend .label-success;
+}
+
+.bug-status-new,
+.bug-status-unconfirmed {
+  @extend .label-danger;
+}
+
+.bug-status-assigned {
+  @extend .label-warning;
+}
+
 @media screen {
   /* Remove the padding we set earlier */
   .header,
