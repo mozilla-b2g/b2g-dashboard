@@ -16,9 +16,8 @@ body {
   padding-bottom: 20px;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
+/* Everything gets side spacing for mobile first views */
 .header,
-.marketing,
 .footer {
   padding-left: 15px;
   padding-right: 15px;
@@ -48,35 +47,42 @@ body {
   margin: 30px 0;
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
+.filters {
+  @extend .form-horizontal;
   border-bottom: 1px solid #e5e5e5;
 
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
+  .clear-filters {
+    @extend .btn;
+    @extend .btn-danger;
+
+    span {
+      @extend .glyphicon;
+      @extend .glyphicon-remove;
+    }
   }
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
+input {
+  @extend .form-control;
+}
 
-  p + h4 {
-    margin-top: 28px;
+table {
+  @extend .table;
+}
+
+.go-to-bugzilla {
+  @extend .btn;
+  @extend .btn-success;
+
+  span {
+    @extend .glyphicon;
+    @extend .glyphicon-new-window;
   }
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-
+@media screen {
   /* Remove the padding we set earlier */
   .header,
-  .marketing,
   .footer {
     padding-left: 0;
     padding-right: 0;
@@ -85,8 +91,7 @@ body {
   .header {
     margin-bottom: 30px;
   }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
+  .filters {
+    margin-bottom: 30px;
   }
 }

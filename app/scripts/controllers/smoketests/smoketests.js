@@ -6,7 +6,6 @@ angular.module('b2gQaDashboardApp')
     $scope.smoketests = {};
     $scope.filteredResults = {};
     $scope.selectedFilters = filters.selected;
-    var checkEquality = true;
 
     executeRequestAndPushData(new SmoketestsBugsRequest());
 
@@ -35,5 +34,9 @@ angular.module('b2gQaDashboardApp')
           delete $scope.filteredResults[bug_id];
         }
       }
+    }
+
+    $scope.filter = function(bug) {
+      filters.selected.bugsIds = [bug.bug_id];
     }
   });

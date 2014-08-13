@@ -6,7 +6,7 @@ angular.module('b2gQaDashboardApp')
     var dataKeys = ['Open', 'Resolved'];
     $scope.chartData = weeklyChartCommons.initializeDataset();
     $scope.chartOptions = weeklyChartCommons.initializeOptions();
-    $scope.chartOptions.onclick = function (chart) { weeklyChartCommons.onclick(chart, $scope); };
+    $scope.chartOptions.onclick = function(chart) { weeklyChartCommons.onclick(chart, $scope); };
     $scope.chartOptions.colors = weeklyChartCommons.linkColors(dataKeys, ['orange', 'green']);
 
     $scope.$watch('filteredResults', function() {

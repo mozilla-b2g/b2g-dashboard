@@ -5,5 +5,8 @@
       "index": "",
       "type": ""
     }
+  },
+  "bugtracker": {
+    "host": "https://bugzilla.mozilla.org/"
   }
 }

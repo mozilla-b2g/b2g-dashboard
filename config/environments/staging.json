@@ -5,5 +5,8 @@
       "index": "public_bugs",
       "type": "bug_version"
     }
+  },
+  "bugtracker": {
+    "host": "https://bugzilla.mozilla.org/"
   }
 }

@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('services')
-  .factory('bugzilla', function () {
+  .factory('bugzilla', function (config) {
 
     var bugzilla = {};
 
     bugzilla.open = function (bugsIds) {
-      window.open('https://bugzilla.mozilla.org/buglist.cgi?bug_id=' + bugsIds.join('%2C'));
+      var endUrl = bugsIds.length === 1 ? 'show_bug.cgi?id=' : 'buglist.cgi?bug_id=';
+      window.open(config.bugtracker.host + endUrl + bugsIds.join('%2C'));
     };
 
     return bugzilla;

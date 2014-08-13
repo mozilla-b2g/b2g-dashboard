@@ -29,6 +29,11 @@ angular.module('b2gQaDashboardApp')
       return selected;
     }
 
+    function clearSelected() {
+      selected.cf_blocking_b2g = available.cf_blocking_b2g[0];
+      selected.bugsIds = [];
+    }
+
     function addAvailable(key, value) {
       if (typeof available[key] === 'undefined') {
         available[key] = [];
@@ -53,7 +58,8 @@ angular.module('b2gQaDashboardApp')
     return {
       available: available,
       selected: selected,
-      generateAvailable: generateAvailable
+      generateAvailable: generateAvailable,
+      clearSelected: clearSelected
     };
 
   });

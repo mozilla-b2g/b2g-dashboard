@@ -6,7 +6,7 @@ angular.module('b2gQaDashboardApp')
     var dataKeys = Object.keys(new IntervalsObject(AGE_RANGES));
     $scope.chartData = weeklyChartCommons.initializeDataset();
     $scope.chartOptions = weeklyChartCommons.initializeOptions();
-    $scope.chartOptions.onclick = function (chart) { weeklyChartCommons.onclick(chart, $scope); };
+    $scope.chartOptions.onclick = function(chart) { weeklyChartCommons.onclick(chart, $scope); };
     $scope.chartOptions.groups = [dataKeys];
     $scope.chartOptions.colors = weeklyChartCommons.linkColors(dataKeys, ['green', 'orange', 'red']);
 

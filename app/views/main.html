@@ -8,4 +8,20 @@
   <div id="smoketestAge" ng-controller="SmoketestsAgeCtrl">
     <angularchart dataset="chartData" options="chartOptions"></angularchart>
   </div>
+
+  <h1>Details
+    <button type="submit" class="go-to-bugzilla" ng-controller="GoToBugzillaCtrl" ng-click="go()">
+      <span></span>
+      Open these bugs in Bugzilla
+    </button>
+  </h1>
+
+  <table>
+    <tr><th>ID</th><th>Summary</th></tr>
+    <tr ng-repeat="bug in filteredResults">
+      <td><a ng-click="filter(bug)">{{ bug.bug_id }}</a></td>
+      <td>{{ bug.short_desc }}</td>
+    </tr>
+  </table>
+
 </div>
