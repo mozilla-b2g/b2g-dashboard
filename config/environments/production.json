@@ -1,9 +1,9 @@
 {
   "databases": {
     "bugs": {
-      "host": "",
-      "index": "",
-      "type": ""
+      "host": "https://esfrontline.bugzilla.mozilla.org",
+      "index": "public_bugs",
+      "type": "bug_version"
     }
   },
   "bugtracker": {
