@@ -23,8 +23,8 @@
       <th>Age (in days)</th>
     </tr>
     <tr ng-repeat="bug in filteredResults">
-      <td><a ng-click="filter(bug)">{{ bug.bug_id }}</a></td>
-      <td>{{ bug.short_desc }} <div class="bug-status bug-status-{{ bug.bug_status }}">{{ bug.bug_status }}</div></td>
+      <td><a ng-click="filter(bug)">{{ bug.id }}</a></td>
+      <td>{{ bug.summary }} <div class="bug-status bug-status-{{ bug.status }}">{{ bug.status }}</div></td>
       <td>{{ bug.getAgeInDays() }}</td>
     </tr>
   </table>

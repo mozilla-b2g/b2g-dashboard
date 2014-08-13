@@ -4,7 +4,7 @@ angular.module('b2gQaDashboardApp')
   .service('filters', function () {
 
     var available = {
-      cf_blocking_b2g: [
+      blockingB2G: [
         { name: '- All -', value: '' }
       ],
       bugsIds: [[]]
@@ -13,24 +13,24 @@ angular.module('b2gQaDashboardApp')
     var selected = getAvailableDefaultValues();
 
     var generateAvailable = function(smoketests) {
-      Object.keys(smoketests).forEach(function(bugId){
+      for (var bugId in smoketests) {
         var bug = smoketests[bugId];
-        var version = removeTrailingPlusOrQuestionMark(bug.cf_blocking_b2g);
+        var version = removeTrailingPlusOrQuestionMark(bug.blockingB2G);
         var value = { name: version, value: version };
-        addAvailable('cf_blocking_b2g', value);
-      })
+        addAvailable('blockingB2G', value);
+      }
     };
 
     function getAvailableDefaultValues() {
       var selected = {};
-      Object.keys(available).forEach(function (key) {
-        selected[key] = available[key][0]
-      });
+      for (var filterName in available) {
+        selected[filterName] = available[filterName][0]
+      }
       return selected;
     }
 
     function clearSelected() {
-      selected.cf_blocking_b2g = available.cf_blocking_b2g[0];
+      selected.blockingB2G = available.blockingB2G[0];
       selected.bugsIds = [];
     }
 

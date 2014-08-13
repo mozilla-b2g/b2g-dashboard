@@ -23,9 +23,7 @@ angular.module('models').factory('IntervalsObject', function() {
 
   function endPointsToString(endPoints, index) {
     var string = endPoints[index];
-    string += index === endPoints.length - 1
-              ? '+'
-              : '-' + endPoints[index+1];
+    string += index === endPoints.length - 1 ? '+' : '-' + endPoints[index+1];
     return string;
   }
 

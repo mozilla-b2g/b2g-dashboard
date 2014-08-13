@@ -20,14 +20,14 @@ angular.module('b2gQaDashboardApp')
         weekResults[key] = []
       });
 
-      for(var bug_id in $scope.filteredResults) {
-        var bug = $scope.filteredResults[bug_id];
+      for(var bugId in $scope.filteredResults) {
+        var bug = $scope.filteredResults[bugId];
         if (bug.wasOpenDuringWeek(lastDayOfTheWeek)) {
-          weekResults[dataKeys[0]].push(bug.bug_id);
+          weekResults[dataKeys[0]].push(bug.id);
         }
 
         if (bug.hasBeenResolvedDuringWeek(lastDayOfTheWeek)) {
-          weekResults[dataKeys[1]].push(bug.bug_id);
+          weekResults[dataKeys[1]].push(bug.id);
         }
       }
       return weekResults;

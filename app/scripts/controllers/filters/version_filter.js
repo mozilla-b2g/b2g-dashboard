@@ -7,7 +7,7 @@ angular.module('b2gQaDashboardApp')
     $scope.selectedFilters = filters.selected;
 
     $scope.setFilter = function(filter) {
-      filters.selected.cf_blocking_b2g = filter;
+      filters.selected.blockingB2G = filter;
     };
 
   });

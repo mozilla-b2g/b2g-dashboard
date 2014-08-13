@@ -5,10 +5,10 @@ angular.module('b2gQaDashboardApp')
 
     $scope.go = function() {
       var bugsIds = [];
-      Object.keys($scope.filteredResults).forEach(function(key) {
-        var bug = $scope.filteredResults[key];
-        bugsIds.push(bug.bug_id);
-      });
-      bugzilla.open(bugsIds)
-    }
+      for(var bugId in $scope.filteredResults) {
+        var bug = $scope.filteredResults[bugId];
+        bugsIds.push(bug.id);
+      }
+      bugzilla.open(bugsIds);
+    };
   });

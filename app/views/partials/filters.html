@@ -11,12 +11,12 @@
   <div class="form-group" ng-controller="VersionFilterCtrl">
     <label class="col-sm-1 control-label">Version:</label>
     <div class="btn-group" dropdown>
-      <button type="button" class="btn">{{ selectedFilters.cf_blocking_b2g.name }}</button>
+      <button type="button" class="btn">{{ selectedFilters.blockingB2G.name }}</button>
       <button type="button" class="btn dropdown-toggle">
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="filter in availableFilters.cf_blocking_b2g | orderBy:'name'">
+        <li ng-repeat="filter in availableFilters.blockingB2G | orderBy:'name'">
           <a ng-click="setFilter(filter)">{{filter.name}}</a>
         </li>
       </ul>

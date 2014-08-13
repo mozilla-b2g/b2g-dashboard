@@ -14,7 +14,7 @@ angular.module('b2gQaDashboardApp')
           format: ' '
         }],
         records: []
-      }
+      };
     };
 
     weeklyChartCommons.initializeOptions = function () {
@@ -27,7 +27,7 @@ angular.module('b2gQaDashboardApp')
         subchart: {
           show: true
         }
-      }
+      };
     };
 
     weeklyChartCommons.generateSortedResultsAndUpdateChart = function(scope, keys, generateWeekResults) {
@@ -41,7 +41,7 @@ angular.module('b2gQaDashboardApp')
     weeklyChartCommons.buildSortedResults = function(filteredResults, generateWeekResults) {
       var sortedResults = {};
       var firstBug = filteredResults[Object.keys(filteredResults)[0]] || {};
-      var currentWeek = getFirstDayOfTheWeek(firstBug.created_ts);
+      var currentWeek = getFirstDayOfTheWeek(firstBug.createdOn);
       var lastWeek = getLastWeek(filteredResults);
 
       while (currentWeek <= lastWeek) {
@@ -93,25 +93,25 @@ angular.module('b2gQaDashboardApp')
       date.setMinutes(0);
       date.setSeconds(0);
       date.setMilliseconds(0);
-      return +date
+      return +date;
     }
 
     function findLatestResolvedTimestamp(bugsObject) {
       var oldestResolvedTimestamp = 0;
 
-      Object.keys(bugsObject).every(function(bugKey) {
-        var bug = bugsObject[bugKey];
+      for (var bugId in bugsObject) {
+        var bug = bugsObject[bugId];
         if (bug.hasEverBeenResolved()) {
-          if (oldestResolvedTimestamp < bug.cf_last_resolved) {
-            oldestResolvedTimestamp = bug.cf_last_resolved;
+          if (oldestResolvedTimestamp < bug.lastResolvedOn) {
+            oldestResolvedTimestamp = bug.lastResolvedOn;
           }
         } else {
           oldestResolvedTimestamp = today;
+          break;
         }
-        return bug.hasEverBeenResolved();
-      });
+      }
 
-      return oldestResolvedTimestamp
+      return oldestResolvedTimestamp;
     }
 
     function getLastWeek(bugsObject) {

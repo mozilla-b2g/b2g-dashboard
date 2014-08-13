@@ -5,49 +5,46 @@ angular.module('models').factory('Bug', function(ONE_WEEK) {
   var UNRESOLVED_TIMESTAMP = -1;
   var UNASSIGNED = 'nobody@mozilla.org';
 
-  var Bug = function(bug_id, short_desc, product, component, bug_status, resolution, created_ts, cf_last_resolved,
-                     keywords, cf_blocking_b2g, assigned_to, expires_on) {
-    this.bug_id = bug_id || 0;
-    this.short_desc = short_desc || '';
+  var Bug = function(bugId, summary, product, component, status, resolution, createdOn, lastResolvedOn, keywords,
+                     blockingB2G, assignedTo, expiresOn) {
+    this.id = bugId || 0;
+    this.summary = summary || '';
     this.product = product || '';
     this.component = component || '';
-    this.bug_status = bug_status || 'unconfirmed';
+    this.status = status || 'unconfirmed';
     this.resolution = resolution || '---';
-    this.created_ts = created_ts || UNRESOLVED_TIMESTAMP;
-    this.cf_last_resolved = cf_last_resolved || UNRESOLVED_TIMESTAMP;
+    this.createdOn = createdOn || UNRESOLVED_TIMESTAMP;
+    this.lastResolvedOn = lastResolvedOn || UNRESOLVED_TIMESTAMP;
     this.keywords = keywords || [];
-    this.cf_blocking_b2g = cf_blocking_b2g || '---';
-    this.assigned_to = assigned_to || UNASSIGNED;
-    this.expires_on = expires_on || 9999999999000;
+    this.blockingB2G = blockingB2G || '---';
+    this.assignedTo = assignedTo || UNASSIGNED;
+    this.expiresOn = expiresOn || 9999999999000;
 
     // Sometimes in Bugzilla, a bug can have the 'new' status and be also assigned
-    this.bug_status = this.bug_status === 'new' && this.assigned_to !== UNASSIGNED ? 'assigned' : this.bug_status;
+    this.status = this.status === 'new' && this.assignedTo !== UNASSIGNED ? 'assigned' : this.status;
   };
 
   Bug.prototype.wasOpenDuringWeek = function(lastDayOfTheWeek) {
     var lastWeek = lastDayOfTheWeek - ONE_WEEK;
-    return this.hasBeenCreatedSince(lastDayOfTheWeek) // Was created before the end of the week
-            && !this.hasBeenResolvedSince(lastWeek);  // But was not resolved before the last week
+    return this.hasBeenCreatedSince(lastDayOfTheWeek) && // Was created before the end of the week
+            !this.hasBeenResolvedSince(lastWeek);  // But was not resolved before the last week
   };
 
   Bug.prototype.hasBeenResolvedDuringWeek = function(lastDayOfTheWeek) {
     var lastWeek = lastDayOfTheWeek - ONE_WEEK;
-    return this.hasBeenResolvedSince(lastDayOfTheWeek) && !this.hasBeenResolvedSince(lastWeek)
+    return this.hasBeenResolvedSince(lastDayOfTheWeek) && !this.hasBeenResolvedSince(lastWeek);
   };
 
   Bug.prototype.hasBeenCreatedSince = function(timestamp) {
-    return this.created_ts <= timestamp;
+    return this.createdOn <= timestamp;
   };
 
   Bug.prototype.hasBeenResolvedSince = function(timestamp) {
-    return this.hasEverBeenResolved() && this.cf_last_resolved <= timestamp;
+    return this.hasEverBeenResolved() && this.lastResolvedOn <= timestamp;
   };
 
   Bug.prototype.getAgeInDaysAt = function(timestamp) {
-    var age = this.hasBeenResolvedSince(timestamp)
-      ? this.cf_last_resolved - this.created_ts
-      : timestamp - this.created_ts;
-
+    var age = this.hasBeenResolvedSince(timestamp) ? this.lastResolvedOn - this.createdOn : timestamp - this.createdOn;
     return Math.round(age / (24 * 60 * 60 * 1000));
   };
 
@@ -56,7 +53,7 @@ angular.module('models').factory('Bug', function(ONE_WEEK) {
   };
 
   Bug.prototype.hasEverBeenResolved = function() {
-    return this.cf_last_resolved > UNRESOLVED_TIMESTAMP;
+    return this.lastResolvedOn > UNRESOLVED_TIMESTAMP;
   };
 
   return Bug;

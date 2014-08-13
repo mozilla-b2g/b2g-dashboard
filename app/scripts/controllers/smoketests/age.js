@@ -18,11 +18,11 @@ angular.module('b2gQaDashboardApp')
       // TODO Make this function more generic
       var weekResults = new IntervalsObject(AGE_RANGES);
 
-      for(var bug_id in $scope.filteredResults) {
-        var bug = $scope.filteredResults[bug_id];
+      for(var bugId in $scope.filteredResults) {
+        var bug = $scope.filteredResults[bugId];
         if (bug.wasOpenDuringWeek(lastDayOfTheWeek)) {
           var age = bug.getAgeInDaysAt(lastDayOfTheWeek);
-          weekResults.addContent(age, bug.bug_id);
+          weekResults.addContent(age, bug.id);
         }
       }
       return weekResults;

@@ -20,23 +20,23 @@ angular.module('b2gQaDashboardApp')
     $scope.$watchCollection('selectedFilters', applySearchFilter);
 
     function applySearchFilter() {
-      var versionFilter = $scope.selectedFilters.cf_blocking_b2g.value.toLowerCase();
+      var versionFilter = $scope.selectedFilters.blockingB2G.value.toLowerCase();
 
       $scope.filteredResults = {};
-      for(var bug_id in $scope.smoketests) {
-        var bug = $scope.smoketests[bug_id];
+      for(var bugId in $scope.smoketests) {
+        var bug = $scope.smoketests[bugId];
 
-        if (bug.cf_blocking_b2g.indexOf(versionFilter) !== -1) {
-          $scope.filteredResults[bug_id] = bug;
+        if (bug.blockingB2G.indexOf(versionFilter) !== -1) {
+          $scope.filteredResults[bugId] = bug;
         }
 
-        if ($scope.selectedFilters.bugsIds.length > 0 && $scope.selectedFilters.bugsIds.indexOf(bug.bug_id) === -1) {
-          delete $scope.filteredResults[bug_id];
+        if ($scope.selectedFilters.bugsIds.length > 0 && $scope.selectedFilters.bugsIds.indexOf(bug.id) === -1) {
+          delete $scope.filteredResults[bugId];
         }
       }
     }
 
     $scope.filter = function(bug) {
-      filters.selected.bugsIds = [bug.bug_id];
+      filters.selected.bugsIds = [bug.id];
     }
   });
