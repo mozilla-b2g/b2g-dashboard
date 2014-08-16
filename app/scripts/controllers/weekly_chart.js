@@ -24,6 +24,9 @@ angular.module('b2gQaDashboardApp')
           name: 'weekDay',
           displayFormat: '%Y-%m-%d'
         },
+        yAxis: {
+          label: 'Bugs count'
+        },
         subchart: {
           show: true
         }
