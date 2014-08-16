@@ -84,8 +84,11 @@ table {
   @extend .label;
 }
 
-.bug-status-resolved,
 .bug-status-verified {
+  background-color: #3c763d;
+}
+
+.bug-status-resolved {
   @extend .label-success;
 }
 
