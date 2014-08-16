@@ -14,6 +14,7 @@ var app = angular
     'ngRoute',
     'ngSanitize',
     'ui.bootstrap',
+    'angular-toArrayFilter',
     'elasticsearch',
     'angularChart',
     'services',

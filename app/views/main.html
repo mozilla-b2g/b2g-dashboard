@@ -22,7 +22,7 @@
       <th>Summary</th>
       <th>Age (in days)</th>
     </tr>
-    <tr ng-repeat="bug in filteredResults">
+    <tr ng-repeat="bug in filteredResults | toArray">
       <td><a ng-click="filter(bug)">{{ bug.id }}</a></td>
       <td>{{ bug.summary }} <div class="bug-status bug-status-{{ bug.status }}">{{ bug.status }}</div></td>
       <td>{{ bug.getAgeInDays() }}</td>
