@@ -3,7 +3,7 @@
 angular.module('b2gQaDashboardApp')
   .controller('SmoketestsAgeCtrl', function ($scope, IntervalsObject, AGE_RANGES, weeklyChartCommons) {
 
-    var dataKeys = Object.keys(new IntervalsObject(AGE_RANGES));
+    var dataKeys = Object.keys(new IntervalsObject(AGE_RANGES, 'days'));
     $scope.chartData = weeklyChartCommons.initializeDataset();
     $scope.chartOptions = weeklyChartCommons.initializeOptions();
     $scope.chartOptions.onclick = function(chart) { weeklyChartCommons.onclick(chart, $scope); };
@@ -16,7 +16,7 @@ angular.module('b2gQaDashboardApp')
 
     function generateWeekResults(lastDayOfTheWeek) {
       // TODO Make this function more generic
-      var weekResults = new IntervalsObject(AGE_RANGES);
+      var weekResults = new IntervalsObject(AGE_RANGES, 'days');
 
       for(var bugId in $scope.filteredResults) {
         var bug = $scope.filteredResults[bugId];
