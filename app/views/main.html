@@ -1,5 +1,5 @@
 <div ng-controller="SmoketestsCtrl">
-
+  <h1>Smoketests</h1>
   <div ng-include src="'views/partials/filters.html'"></div>
 
   <div id="smoketestOpenResolved" ng-controller="SmoketestsOpenResolvedCtrl">
@@ -9,12 +9,12 @@
     <angularchart dataset="chartData" options="chartOptions"></angularchart>
   </div>
 
-  <h1>Details
+  <h2>Details
     <button type="submit" class="go-to-bugzilla" ng-controller="GoToBugzillaCtrl" ng-click="go()">
       <span></span>
       Open these bugs in Bugzilla
     </button>
-  </h1>
+  </h2>
 
   <table>
     <tr>
