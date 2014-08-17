@@ -44,8 +44,8 @@ angular.module('models').factory('Bug', function(ONE_WEEK) {
   };
 
   Bug.prototype.getAgeInDaysAt = function(timestamp) {
-    var age = this.hasBeenResolvedSince(timestamp) ? this.lastResolvedOn - this.createdOn : timestamp - this.createdOn;
-    return Math.round(age / (24 * 60 * 60 * 1000));
+    var endDate = this.hasBeenResolvedSince(timestamp) ? this.lastResolvedOn : timestamp;
+    return Date.getWorkingDaysBetween(this.createdOn, endDate);
   };
 
   Bug.prototype.getAgeInDays = function() {
