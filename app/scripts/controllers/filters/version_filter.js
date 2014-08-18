@@ -6,8 +6,17 @@ angular.module('b2gQaDashboardApp')
     $scope.availableFilters = filters.available;
     $scope.selectedFilters = filters.selected;
 
-    $scope.setFilter = function(filter) {
-      filters.selected.blockingB2G = filter;
+    $scope.toggleSelection = function toggleSelection(version) {
+      var selectedVersions = angular.copy($scope.selectedFilters.versions);
+      var idx = $scope.selectedFilters.versions.indexOf(version);
+
+      if (idx > -1) {
+        selectedVersions.splice(idx, 1);
+      } else {
+        selectedVersions.push(version);
+      }
+
+      $scope.selectedFilters.versions = selectedVersions;
     };
 
   });

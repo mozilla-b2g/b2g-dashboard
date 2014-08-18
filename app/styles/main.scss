@@ -62,8 +62,25 @@ body {
   }
 }
 
-input {
+input[type=text] {
   @extend .form-control;
+}
+
+.form-group {
+  > label {
+    @include make-xs-column(2);
+    @include make-sm-column(2);
+    @include make-md-column(2);
+    @include make-lg-column(1);
+    @extend .control-label;
+  }
+
+  > :not(label) {
+    @include make-xs-column(10);
+    @include make-sm-column(10);
+    @include make-md-column(10);
+    @include make-lg-column(11);
+  }
 }
 
 table {

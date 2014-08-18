@@ -56,5 +56,10 @@ angular.module('models').factory('Bug', function(ONE_WEEK) {
     return this.lastResolvedOn > UNRESOLVED_TIMESTAMP;
   };
 
+  Bug.prototype.getVersion = function() {
+    var lastChar = this.blockingB2G.slice(-1);
+    return ['+', '?'].indexOf(lastChar) === -1 ? this.blockingB2G : this.blockingB2G.slice(0, -1);
+  };
+
   return Bug;
 });

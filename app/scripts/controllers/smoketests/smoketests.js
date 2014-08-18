@@ -20,13 +20,12 @@ angular.module('b2gQaDashboardApp')
     $scope.$watchCollection('selectedFilters', applySearchFilter);
 
     function applySearchFilter() {
-      var versionFilter = $scope.selectedFilters.blockingB2G.value.toLowerCase();
 
       $scope.filteredResults = {};
       for(var bugId in $scope.smoketests) {
         var bug = $scope.smoketests[bugId];
 
-        if (bug.blockingB2G.indexOf(versionFilter) !== -1) {
+        if ($scope.selectedFilters.versions.length > 0 && $scope.selectedFilters.versions.indexOf(bug.getVersion()) !== -1) {
           $scope.filteredResults[bugId] = bug;
         }
 
