@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('b2gQaDashboardApp')
+angular.module('dashboardApp')
   .controller('SmoketestsCtrl', function ($scope, config, SmoketestsBugsRequest, filters) {
 
     $scope.smoketests = {};

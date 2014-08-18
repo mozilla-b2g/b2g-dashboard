@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('b2gQaDashboardApp')
+angular.module('dashboardApp')
   .controller('SmoketestsAgeCtrl', function ($scope, IntervalsObject, AGE_RANGES, weeklyChartCommons) {
 
     var dataKeys = Object.keys(new IntervalsObject(AGE_RANGES, 'business days'));

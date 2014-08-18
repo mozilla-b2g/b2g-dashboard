@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name b2gQaDashboardApp
+ * @name dashboardApp
  * @description
- * # b2gQaDashboardApp
+ * # dashboardApp
  *
  * Main module of the application.
  */
 var app = angular
-  .module('b2gQaDashboardApp', [
+  .module('dashboardApp', [
     'ngAnimate',
     'ngRoute',
     'ngSanitize',

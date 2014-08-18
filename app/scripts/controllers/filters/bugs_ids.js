@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('b2gQaDashboardApp')
+angular.module('dashboardApp')
   .controller('BugsIdsFilterCtrl', function ($scope, filters) {
 
     $scope.availableFilters = filters.available;

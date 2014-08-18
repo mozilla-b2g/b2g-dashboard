@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.org/JohanLorenzo/b2g-qa-dashboard.png?branch=master)](https://travis-ci.org/JohanLorenzo/b2g-qa-dashboard)
+[![Build Status](https://travis-ci.org/JohanLorenzo/b2g-dashboard.png?branch=master)](https://travis-ci.org/JohanLorenzo/b2g-dashboard)

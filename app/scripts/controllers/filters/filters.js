@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('b2gQaDashboardApp')
+angular.module('dashboardApp')
   .service('filters', function (FiltersCookies) {
 
     var available = {

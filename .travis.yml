@@ -11,7 +11,7 @@ env:
     global:
         - secure: "G/ePNYs80iw2mHY5yGk8AjYjU7FStBWXZZENFUDo2JiE0SaTnHR5fGtTj4F1+kz58QueOjr8VuLrsqcCDocqTqKgJDSoXEM5dpnftUMWs2JTidjTVfxxR02OvBNTfiJrWzJWvw6WGfQxhQlpOrz7uc3fIAdSYLvoHr69r2OYGQo="
         - GH_OWNER: JohanLorenzo
-        - GH_PROJECT_NAME: b2g-qa-dashboard
+        - GH_PROJECT_NAME: b2g-dashboard
 
 before_script:
     # install dependencies

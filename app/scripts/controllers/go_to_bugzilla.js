@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('b2gQaDashboardApp')
+angular.module('dashboardApp')
   .controller('GoToBugzillaCtrl', function ($scope, bugzilla) {
 
     $scope.go = function() {

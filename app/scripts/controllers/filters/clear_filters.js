@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('b2gQaDashboardApp')
+angular.module('dashboardApp')
   .controller('ClearFiltersCtrl', function ($scope, filters, FiltersCookies) {
 
     $scope.clear = function() {

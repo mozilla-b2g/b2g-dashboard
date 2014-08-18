@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('b2gQaDashboardApp')
+angular.module('dashboardApp')
   .factory('weeklyChartCommons', function (config, ONE_WEEK, filters) {
 
     var today = Date.now();
