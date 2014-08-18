@@ -13,7 +13,8 @@ describe('Models: Date', function () {
     var MONDAY_11PM = new Date(2014, JUNE, 2, 23);
     var TUESDAY_MORNING = new Date(2014, JUNE, 3, MORNING);
     var WEDNESDAY_MIDNIGHT = new Date(2014, JUNE, 4);
-    var SARTUDAY_MIDNIGHT = new Date(2014, JUNE, 7);
+    var SATURDAY_MIDNIGHT = new Date(2014, JUNE, 7);
+    var NEXT_SUNDAY_MIDNIGHT = new Date(2014, JUNE, 8);
     var NEXT_MONDAY_MIDNIGHT = new Date(2014, JUNE, 9);
     var NEXT_MONDAY_MORNING = new Date(2014, JUNE, 9, MORNING);
 
@@ -33,12 +34,12 @@ describe('Models: Date', function () {
     });
 
     it('should return 5 for an entire work week', function () {
-      var businessDays = Date.getWorkingDaysBetween(MONDAY_MIDNIGHT, SARTUDAY_MIDNIGHT);
+      var businessDays = Date.getWorkingDaysBetween(MONDAY_MIDNIGHT, SATURDAY_MIDNIGHT);
       expect(businessDays).toBe(5);
     });
 
     it('should return 0 for an entire weekend', function () {
-      var businessDays = Date.getWorkingDaysBetween(SARTUDAY_MIDNIGHT, NEXT_MONDAY_MIDNIGHT);
+      var businessDays = Date.getWorkingDaysBetween(SATURDAY_MIDNIGHT, NEXT_MONDAY_MIDNIGHT);
       expect(businessDays).toBe(0);
     });
 
@@ -55,6 +56,11 @@ describe('Models: Date', function () {
     it('should return 5 for a weekend and an entire week', function () {
       var businessDays = Date.getWorkingDaysBetween(SUNDAY, NEXT_MONDAY_MIDNIGHT);
       expect(businessDays).toBe(5);
+    });
+
+    it('should return 0 for something started during the weekend and ended during this same weekend', function () {
+      var businessDays = Date.getWorkingDaysBetween(SATURDAY_MIDNIGHT, NEXT_SUNDAY_MIDNIGHT);
+      expect(businessDays).toBe(0);
     });
   });
 });

@@ -26,5 +26,5 @@ Date.getWorkingDaysBetween = function(startDateTimestamp, endDateTimestamp) {
     }
   }
 
-  return days;
+  return days >= 0 ? days : 0;
 };
