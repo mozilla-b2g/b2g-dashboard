@@ -1,1 +1,1 @@
-angular.module('services', ['constants', 'config', 'models']);
+angular.module('services', ['ngCookies', 'constants', 'config', 'models']);

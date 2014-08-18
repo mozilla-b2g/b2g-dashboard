@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('b2gQaDashboardApp')
-  .controller('VersionFilterCtrl', function ($scope, filters) {
+  .controller('VersionFilterCtrl', function ($scope, filters, FiltersCookies) {
 
     $scope.availableFilters = filters.available;
     $scope.selectedFilters = filters.selected;
@@ -17,6 +17,7 @@ angular.module('b2gQaDashboardApp')
       }
 
       $scope.selectedFilters.versions = selectedVersions;
+      FiltersCookies.setVersionFilter(selectedVersions);
     };
 
   });

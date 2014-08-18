@@ -1,26 +1,27 @@
 'use strict';
 
 angular.module('b2gQaDashboardApp')
-  .service('filters', function () {
+  .service('filters', function (FiltersCookies) {
 
     var available = {
       versions: []
     };
 
-    var selected = {};
-    clearSelected();
+    var selected = {
+      versions: [],
+      bugsIds: []
+    };
 
     var generateAvailable = function(smoketests) {
       for (var bugId in smoketests) {
         var bug = smoketests[bugId];
         addAvailable('versions', bug.getVersion());
       }
-
-      clearSelected();
+      selected.versions = FiltersCookies.getVersionFilters();
     };
 
     function clearSelected() {
-      selected.versions = angular.copy(available.versions);
+      selected.versions = [];
       selected.bugsIds = [];
     }
 
