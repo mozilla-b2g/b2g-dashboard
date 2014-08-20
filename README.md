@@ -1,6 +1,6 @@
-# B2G Dashboard [![Build Status](https://travis-ci.org/JohanLorenzo/b2g-dashboard.png?branch=master)](https://travis-ci.org/JohanLorenzo/b2g-dashboard)
+# B2G Dashboard [![Build Status](https://travis-ci.org/mozilla-b2g/b2g-dashboard.png?branch=master)](https://travis-ci.org/mozilla-b2g/b2g-dashboard)
 This dashboard is developed to track bugs from smoketests in [Firefox OS](https://www.mozilla.org/en-US/firefox/os/).
-Here you can find a [live instance](http://johanlorenzo.github.io/b2g-dashboard).
+Here you can find a [live instance](http://mozilla-b2g.github.io/b2g-dashboard).
 
 ## Run it locally
 1. Install [Node.js + npm](http://nodejs.org/), [bower](http://bower.io/) and [grunt-cli](http://gruntjs.com/getting-started)
