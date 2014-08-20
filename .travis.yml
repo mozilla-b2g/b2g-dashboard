@@ -24,4 +24,4 @@ deploy:
       secure: fotI8fAV0rUGf9KZF57HyBxBhW9uYkplNoMMiOmRTVv6++9zaaM4aNs4Im4xyZbigAFr4ghc7odaYOH4Zs2jBc8ouPS+BH+KDap8qKw8EfX2h5jwgm7CNt4OLdlpxmDJ464eB3SVPNQWLN/MyBFzxnFvVpaWMnaIji42ustvPr8=
     bucket: b2g-dashboard
     skip_cleanup: true
-    upload-dir: dist
+    local-dir: dist
