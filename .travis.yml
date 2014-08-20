@@ -2,16 +2,9 @@ language:
     node_js
 node_js:
     - 0.10
-notifications:
-    irc: "irc.freenode.org#generator-travis-ci"
 branches:
     only:
         - master
-env:
-    global:
-        - secure: "G/ePNYs80iw2mHY5yGk8AjYjU7FStBWXZZENFUDo2JiE0SaTnHR5fGtTj4F1+kz58QueOjr8VuLrsqcCDocqTqKgJDSoXEM5dpnftUMWs2JTidjTVfxxR02OvBNTfiJrWzJWvw6WGfQxhQlpOrz7uc3fIAdSYLvoHr69r2OYGQo="
-        - GH_OWNER: JohanLorenzo
-        - GH_PROJECT_NAME: b2g-dashboard
 
 before_script:
     # install dependencies
@@ -22,17 +15,11 @@ script:
     # We want to gate on passing tests and a successful build
     - bower install
     - grunt staging
-after_success:
-    # Any command that using GH_OAUTH_TOKEN must pipe the output to /dev/null to not expose your oauth token
-    - git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} site > /dev/null 2>&1
-    - cd site
-    - if git checkout gh-pages; then git checkout -b gh-pages; fi
-    - git rm -r .
-    - cp -R ../dist/* .
-    - cp ../dist/.* .
-    - git add -f .
-    - git config user.email ""
-    - git config user.name "Johan Lorenzo"
-    - git commit -am "adding the yeoman build files to gh-pages [ci skip]"
-    # Any command that using GH_OAUTH_TOKEN must pipe the output to /dev/null to not expose your oauth token
-    - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages > /dev/null 2>&1
+
+deploy:
+    provider: s3
+    access_key_id:
+      secure: TMVA47aCJxdHhjsCEeVxagz7bm2qZRHBSyRogh4pCu/xqNzHK8F9v7ck+Mxtmu4IKHHXaVn1oDT1/B68ejrvtF385s9dc44GXTF2FGKHHuM8d+AtO5UIGRuFs1xeq9mxvGr52CnX9/RhP+Evk1APbEUxkSNjcUYP/7A7i09eMZ4=
+    secret_access_key:
+      secure: fotI8fAV0rUGf9KZF57HyBxBhW9uYkplNoMMiOmRTVv6++9zaaM4aNs4Im4xyZbigAFr4ghc7odaYOH4Zs2jBc8ouPS+BH+KDap8qKw8EfX2h5jwgm7CNt4OLdlpxmDJ464eB3SVPNQWLN/MyBFzxnFvVpaWMnaIji42ustvPr8=
+    bucket: b2g-dashboard
