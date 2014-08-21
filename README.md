@@ -3,7 +3,7 @@ This dashboard is developed to track bugs from smoketests in [Firefox OS](https:
 Here you can find a [live instance](http://mozilla-b2g.github.io/b2g-dashboard).
 
 ## Run it locally
-1. Install [Node.js + npm](http://nodejs.org/), [bower](http://bower.io/) and [grunt-cli](http://gruntjs.com/getting-started)
+1. Install [Node.js + npm](http://nodejs.org/), [Bower](http://bower.io/), [grunt-cli](http://gruntjs.com/getting-started), [Compass](http://compass-style.org/install/)
 1. Clone the project
 1. cd into it
 1. `npm install`
