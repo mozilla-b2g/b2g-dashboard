@@ -9,4 +9,4 @@ Here you can find a [live instance](http://mozilla-b2g.github.io/b2g-dashboard).
 1. `npm install`
 1. `bower install`
 1. `grunt serve`
-1. If you don't have a copy of [Bugzilla ES cluster](https://wiki.mozilla.org/BMO/ElasticSearch): `grunt replace:production`
+1. If you don't have a copy of [Bugzilla ES cluster](https://wiki.mozilla.org/BMO/ElasticSearch), while the server is running, type `grunt replace:production` in another shell.
